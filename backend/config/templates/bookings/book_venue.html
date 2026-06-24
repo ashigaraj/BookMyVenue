@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Venue</title>
+</head>
+<body>
+
+<h1>Add Venue</h1>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">
+        Book Venue
+    </button>
+
+</form>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Customer Venue List</title>
+</head>
+<body>
+
+<h2>Available Venues</h2>
+
+{% for venue in venues %}
+
+    <h3>{{ venue.name }}</h3>
+
+    <p>{{ venue.location }}</p>
+
+{% empty %}
+
+    <p>No venues available.</p>
+
+{% endfor %}
+
+</body>
+</html>

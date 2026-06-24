@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+   
+</head>
+<body>
+
+<h2>Available Venues</h2>
+
+{% for venue in venues %}
+
+    <h3>{{ venue.name }}</h3>
+
+    <p>{{ venue.location }}</p>
+
+    <form method="POST">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <a href="{% url 'book_venue' venue.id %}">
+    Book Now
+</a>
+
+    </form>
+
+{% empty %}
+
+    <p>No venues available.</p>
+
+{% endfor %}
+
+</body>
+</html>
