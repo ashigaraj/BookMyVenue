@@ -27,10 +27,20 @@ class User(AbstractUser):
     
 
 class OTPVerification(models.Model):
+    ROLE_CHOICES = (
+        ('CUSTOMER', 'Customer'),
+        ('OWNER', 'Owner'),
+        ('ADMIN', 'Admin'),
+    )
     username = models.CharField(max_length=150)
     email = models.EmailField()
     phone = models.CharField(max_length=15)
     password = models.CharField(max_length=128)
+    role=role = models.CharField(
+        max_length=20,
+        choices=ROLE_CHOICES,
+        default='CUSTOMER'
+    )
 
     otp = models.CharField(max_length=6)
 

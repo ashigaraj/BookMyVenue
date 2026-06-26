@@ -38,7 +38,7 @@ function Login() {
                     "access_token",
                     data.access
                 );
-                if(data.role=="CUSTOMER"){
+                if(data.role=="customer"){
                      navigate("/customer/dashboard")
                    
                 }else{

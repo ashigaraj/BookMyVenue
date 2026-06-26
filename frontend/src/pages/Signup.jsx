@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const [username, setUsername] = useState("");
@@ -9,6 +10,8 @@ function Signup() {
 
   const [otp, setOtp] = useState("");
   const [otpSent, setOtpSent] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -21,6 +24,7 @@ function Signup() {
           headers: {
             "Content-Type": "application/json",
           },
+          // convert javascript object into json format
           body: JSON.stringify({
             username,
             email,
@@ -32,7 +36,8 @@ function Signup() {
       );
 
       const data = await response.json();
-
+      
+      //if credentials are ok (status code between 200-299)
       if (response.ok) {
         alert(data.message);
         setOtpSent(true);
@@ -65,11 +70,13 @@ function Signup() {
 
       if (response.ok) {
         alert(data.message);
+         navigate("/login")
 
-        // Redirect to login page here
-        // navigate('/login');
+        
       } else {
         alert(data.error);
+        
+
       }
     } catch (error) {
       console.error(error);
@@ -116,7 +123,7 @@ function Signup() {
             style={styles.input}
              >
           <option value="customer">Customer</option>
-            <option value="vendor">Vendor</option>
+            <option value="owner"> Venue Owner</option>
            </select>
 
           <input
@@ -165,30 +172,77 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#f5f5f5",
+    background: "linear-gradient(135deg, #6a11cb 0%, #2575fc 100%)",
+    fontFamily: "Arial, sans-serif",
   },
+
   card: {
-    width: "400px",
-    padding: "30px",
-    backgroundColor: "#fff",
-    borderRadius: "10px",
-    boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+    width: "420px",
+    padding: "35px",
+    backgroundColor: "#ffffff",
+    borderRadius: "20px",
+    boxShadow: "0 15px 35px rgba(0,0,0,0.2)",
+    textAlign: "center",
   },
+
+  heading: {
+    marginBottom: "25px",
+    color: "#2575fc",
+    fontSize: "30px",
+    fontWeight: "bold",
+  },
+
   input: {
     width: "100%",
-    padding: "12px",
-    marginBottom: "15px",
-    border: "1px solid #ccc",
-    borderRadius: "5px",
+    padding: "14px",
+    marginBottom: "18px",
+    border: "2px solid #d9d9d9",
+    borderRadius: "10px",
+    fontSize: "16px",
+    outline: "none",
+    transition: "0.3s",
     boxSizing: "border-box",
   },
+
   button: {
     width: "100%",
-    padding: "12px",
+    padding: "14px",
     border: "none",
-    borderRadius: "5px",
+    borderRadius: "10px",
+    background: "linear-gradient(90deg, #ff6a00, #ee0979)",
+    color: "#fff",
+    fontSize: "17px",
+    fontWeight: "bold",
+    cursor: "pointer",
+    transition: "0.3s",
+    boxShadow: "0 5px 15px rgba(238,9,121,0.3)",
+  },
+
+  secondaryButton: {
+    width: "100%",
+    padding: "14px",
+    marginTop: "12px",
+    border: "none",
+    borderRadius: "10px",
+    background: "linear-gradient(90deg, #36d1dc, #5b86e5)",
+    color: "#fff",
+    fontSize: "16px",
+    fontWeight: "bold",
+    cursor: "pointer",
+    transition: "0.3s",
+  },
+
+  text: {
+    marginTop: "18px",
+    color: "#555",
+    fontSize: "14px",
+  },
+
+  link: {
+    color: "#ee0979",
+    textDecoration: "none",
+    fontWeight: "bold",
     cursor: "pointer",
   },
 };
-
 export default Signup;
